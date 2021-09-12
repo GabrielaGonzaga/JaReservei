@@ -1,0 +1,123 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Senai_OfertasWebApi</name>
+    </assembly>
+    <members>
+        <member name="M:Senai_OfertasWebApi.Controllers.loginController.#ctor">
+            <summary>
+            Instancia este objeto para que haja a referência aos métodos no repositório
+            </summary>
+        </member>
+        <member name="M:Senai_OfertasWebApi.Controllers.loginController.Post(Senai_OfertasWebApi.ViewModels.LoginViewModel)">
+            <summary>
+            Valida o usuário
+            </summary>
+            <param name="login">Objeto login que contém o e-mail e a senha do usuário</param>
+            <returns>Retorna um token com as informações do usuário</returns>
+            dominio/api/Login
+        </member>
+        <member name="M:Senai_OfertasWebApi.Controllers.UsuarioController.Get">
+            <summary>
+            Lista todos os usuarios
+            </summary>
+            <returns>Uma lista de usuarios e um status code 200 - ok </returns>
+        </member>
+        <member name="M:Senai_OfertasWebApi.Controllers.UsuarioController.Post(Senai_OfertasWebApi.Domains.Usuario)">
+            <summary>
+            Cadastra um novo usuario
+            </summary>
+            <param name="NovoUsuario">objeto NovoUsuario que será cadastrado</param>
+            <returns>um statud code 201- Created</returns>
+        </member>
+        <member name="M:Senai_OfertasWebApi.Interfaces.IProdutoRepository.Listar">
+            <summary>
+            Lista todos os produtos
+            </summary>
+            <returns>Uma lista de produto</returns>
+        </member>
+        <member name="M:Senai_OfertasWebApi.Interfaces.IProdutoRepository.Cadastrar(Senai_OfertasWebApi.Domains.Produto)">
+            <summary>
+            Cadastra um novo produto
+            </summary>
+            <param name="novoProduto">Objeto novoprodutoque será cadastrado</param>
+        </member>
+        <member name="M:Senai_OfertasWebApi.Interfaces.IProdutoRepository.Deletar(System.Int32)">
+            <summary>
+            Deleta um produto existente
+            </summary>
+            <param name="id">ID da produto que será deletada</param>
+        </member>
+        <member name="M:Senai_OfertasWebApi.Interfaces.IProdutoRepository.Atualizar(System.Int32,Senai_OfertasWebApi.Domains.Produto)">
+            <summary>
+            Atualiza um produto existente
+            </summary>
+            <param name="id">Id da produto que será atualizado</param>
+            <param name="produtoAtualizado">Objeto salaAtualizada que receberá os novos valores</param>
+        </member>
+        <member name="M:Senai_OfertasWebApi.Interfaces.IProdutoRepository.BuscarPorId(System.Int32)">
+            <summary>
+            Buscar uma produto por seu id
+            </summary>
+            <param name="id">id da produto a ser buscado</param>
+            <returns>uma produto buscado</returns>
+        </member>
+        <member name="M:Senai_OfertasWebApi.Interfaces.ITipoProdutoRepository.Listar">
+            <summary>
+            Uma lista de TipoProduto
+            </summary>
+            <returns>Retorna uma lista de TipoProduto</returns>
+        </member>
+        <member name="M:Senai_OfertasWebApi.Interfaces.ITipoProdutoRepository.Cadastrar(Senai_OfertasWebApi.Domains.TipoProduto)">
+            <summary>
+            Cadastra um novo tipo de TipoProduto
+            </summary>
+        </member>
+        <member name="M:Senai_OfertasWebApi.Interfaces.ITipoProdutoRepository.Atualizar(System.Int32,Senai_OfertasWebApi.Domains.TipoProduto)">
+            <summary>
+            Atualiza um TipoProduto existente
+            </summary>
+            <param name="id">id do TipoProduto que será atualizado</param>
+            <param name="TipoProdutoAtualizado">Objeto TipoProdutoAtualizado com as novas Informações</param>
+        </member>
+        <member name="M:Senai_OfertasWebApi.Interfaces.ITipoProdutoRepository.Deletar(System.Int32)">
+            <summary>
+            Deleta um TipoProduto existente
+            </summary>
+            <param name="id">id do TipoProduto que sera deletado</param>
+        </member>
+        <member name="M:Senai_OfertasWebApi.Interfaces.IUsuarioRepository.Listar">
+            <summary>
+            Lista todos os usuários
+            </summary>
+            <returns>Uma lista de usuários</returns>
+        </member>
+        <member name="M:Senai_OfertasWebApi.Interfaces.IUsuarioRepository.BuscarPorId(System.Int32)">
+            <summary>
+            Busca um usuário através do ID
+            </summary>
+            <param name="id">ID do usuário que será buscado</param>
+            <returns>Um usuário buscado</returns>
+        </member>
+        <member name="M:Senai_OfertasWebApi.Interfaces.IUsuarioRepository.Cadastrar(Senai_OfertasWebApi.Domains.Usuario)">
+            <summary>
+            Cadastra um novo usuário
+            </summary>
+            <param name="novoUsuario">Objeto novoUsuario que será cadastrado</param>
+        </member>
+        <member name="M:Senai_OfertasWebApi.Interfaces.IUsuarioRepository.Deletar(System.Int32)">
+            <summary>
+            Deleta um usuário existente
+            </summary>
+            <param name="id">ID do usuário que será deletado</param>
+        </member>
+        <member name="M:Senai_OfertasWebApi.Interfaces.IUsuarioRepository.Login(System.String,System.String)">
+            <summary>
+            Valida o usuário
+            </summary>
+            <param name="email">e-mail do usuário</param>
+            <param name="senha">senha do usuário</param>
+            <returns>Um objeto do tipo Usuario que foi buscado</returns>
+        </member>
+    </members>
+</doc>
