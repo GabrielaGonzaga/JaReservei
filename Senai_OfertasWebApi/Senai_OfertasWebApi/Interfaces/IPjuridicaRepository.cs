@@ -6,26 +6,26 @@ using System.Threading.Tasks;
 
 namespace Senai_OfertasWebApi.Interfaces
 {
-    interface IUsuarioRepository
+    interface IPjuridicaRepository
     {
         /// <summary>
         /// Lista todos os usuários
         /// </summary>
         /// <returns>Uma lista de usuários</returns>
-        List<Usuario> Listar();
+        List<Pjuridica> Listar();
 
         /// <summary>
         /// Busca um usuário através do ID
         /// </summary>
         /// <param name="id">ID do usuário que será buscado</param>
         /// <returns>Um usuário buscado</returns>
-        Usuario BuscarPorId(int id);
+        Pjuridica BuscarPorId(int id);
 
         /// <summary>
         /// Cadastra um novo usuário
         /// </summary>
-        /// <param name="novoUsuario">Objeto novoUsuario que será cadastrado</param>
-        void Cadastrar(Usuario novoUsuario);
+        /// <param name="novaPjuridica">Objeto novoUsuario que será cadastrado</param>
+        void Cadastrar(Pjuridica novaPjuridica);
 
         /// <summary>
         /// Deleta um usuário existente
@@ -39,6 +39,6 @@ namespace Senai_OfertasWebApi.Interfaces
         /// <param name="email">e-mail do usuário</param>
         /// <param name="senha">senha do usuário</param>
         /// <returns>Um objeto do tipo Usuario que foi buscado</returns>
-        Usuario Login(string email, string senha);
+        Pjuridica Login(string email, string senha);
     }
 }

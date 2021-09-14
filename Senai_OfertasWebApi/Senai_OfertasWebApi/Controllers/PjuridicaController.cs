@@ -17,17 +17,17 @@ namespace Senai_OfertasWebApi.Controllers
     [Produces("application/json")]
     [Route("api/[controller]")]
     [ApiController]
-    public class loginController : ControllerBase
+    public class PjuridicaController : ControllerBase
     {
 
-        private IUsuarioRepository _usuarioRepository { get; set; }
+        private IPjuridicaRepository _PjuridicaRepository { get; set; }
 
         /// <summary>
         /// Instancia este objeto para que haja a referência aos métodos no repositório
         /// </summary>
-        public loginController()
+        public PjuridicaController()
         {
-            _usuarioRepository = new usuarioRepository();
+            _PjuridicaRepository = new PjuridicaRepository();
         }
 
         /// <summary>
@@ -42,10 +42,10 @@ namespace Senai_OfertasWebApi.Controllers
             try
             {
                 // Busca o usuário pelo e-mail e senha
-                Usuario usuarioBuscado = _usuarioRepository.Login(login.Email, login.Senha);
+                Pjuridica PjuridicaBuscado = _PjuridicaRepository.Login(login.Email, login.Senha);
 
                 // Caso não encontre nenhum usuário com o e-mail e senha informados
-                if (usuarioBuscado == null)
+                if (PjuridicaBuscado == null)
                 {
                     // Retorna NotFound com uma mensagem de erro
                     return NotFound("E-mail ou senha inválidos!");
@@ -63,10 +63,10 @@ namespace Senai_OfertasWebApi.Controllers
                 var claims = new[]
                 {
                     // Armazena na Claim o e-mail do usuário autenticado
-                    new Claim(JwtRegisteredClaimNames.Email, usuarioBuscado.Email),
+                    new Claim(JwtRegisteredClaimNames.Email, PjuridicaBuscado.Email),
 
                     // Armazena na Claim o ID do usuário autenticado
-                    new Claim(JwtRegisteredClaimNames.Jti, usuarioBuscado.IdUsuario.ToString())
+                    new Claim(JwtRegisteredClaimNames.Jti, PjuridicaBuscado.IdPjuridica.ToString())
                 };
 
                 // Define a chave de acesso ao token
@@ -97,4 +97,5 @@ namespace Senai_OfertasWebApi.Controllers
         }
 
     }
+
 }

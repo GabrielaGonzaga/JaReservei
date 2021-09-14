@@ -9,11 +9,13 @@ namespace Senai_OfertasWebApi.Domains
     {
         public int IdReserva { get; set; }
         public int? IdProduto { get; set; }
-        public int? IdUsuario { get; set; }
+        public int? IdPfisica { get; set; }
+        public int? IdPjuridica { get; set; }
         public int Quantidade { get; set; }
         public double PrecoTotal { get; set; }
 
+        public virtual Pfisica IdPfisicaNavigation { get; set; }
+        public virtual Pjuridica IdPjuridicaNavigation { get; set; }
         public virtual Produto IdProdutoNavigation { get; set; }
-        public virtual Usuario IdUsuarioNavigation { get; set; }
     }
 }

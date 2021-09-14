@@ -7538,11 +7538,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Lameck\\Desktop\\SenaiOfertas\\Senai_OfertasWebApi\\Senai_OfertasWebApi\\Senai_OfertasWebApi.csproj",
+      "projectUniqueName": "C:\\Users\\Lameck\\Desktop\\git-senai_ofertas\\Senai_Ofertas\\Senai_OfertasWebApi\\Senai_OfertasWebApi\\Senai_OfertasWebApi.csproj",
       "projectName": "Senai_OfertasWebApi",
-      "projectPath": "C:\\Users\\Lameck\\Desktop\\SenaiOfertas\\Senai_OfertasWebApi\\Senai_OfertasWebApi\\Senai_OfertasWebApi.csproj",
+      "projectPath": "C:\\Users\\Lameck\\Desktop\\git-senai_ofertas\\Senai_Ofertas\\Senai_OfertasWebApi\\Senai_OfertasWebApi\\Senai_OfertasWebApi.csproj",
       "packagesPath": "C:\\Users\\Lameck\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Lameck\\Desktop\\SenaiOfertas\\Senai_OfertasWebApi\\Senai_OfertasWebApi\\obj\\",
+      "outputPath": "C:\\Users\\Lameck\\Desktop\\git-senai_ofertas\\Senai_Ofertas\\Senai_OfertasWebApi\\Senai_OfertasWebApi\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Lameck\\AppData\\Roaming\\NuGet\\NuGet.Config",

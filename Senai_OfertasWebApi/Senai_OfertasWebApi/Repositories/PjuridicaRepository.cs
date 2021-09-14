@@ -8,27 +8,25 @@ using System.Threading.Tasks;
 
 namespace Senai_OfertasWebApi.Repositories
 {
-    public class usuarioRepository : IUsuarioRepository
+    public class PjuridicaRepository : IPjuridicaRepository
     {
-
         SenaiOfertasContext ctx = new SenaiOfertasContext();
-
-        public Usuario BuscarPorId(int id)
+        public Pjuridica BuscarPorId(int id)
         {
             // Retorna o primeiro usuário encontrado para o ID informado, sem exibir sua senha
-            return ctx.Usuarios
-                .Select(u => new Usuario()
+            return ctx.Pjuridicas
+                .Select(u => new Pjuridica()
                 {
-                    IdUsuario = u.IdUsuario,
+                    IdPjuridica = u.IdPjuridica,
                     Email = u.Email
                 })
-                .FirstOrDefault(u => u.IdUsuario == id);
+                .FirstOrDefault(u => u.IdPjuridica == id);
         }
 
-        public void Cadastrar(Usuario novoUsuario)
+        public void Cadastrar(Pjuridica novaPjuridica)
         {
             // Adiciona este novoUsuario
-            ctx.Usuarios.Add(novoUsuario);
+            ctx.Pjuridicas.Add(novaPjuridica);
 
             // Salva as informações para serem gravadas no banco de dados
             ctx.SaveChanges();
@@ -37,21 +35,21 @@ namespace Senai_OfertasWebApi.Repositories
         public void Deletar(int id)
         {
             // Remove o tipo de usuário que foi buscado
-            ctx.Usuarios.Remove(BuscarPorId(id));
+            ctx.Pjuridicas.Remove(BuscarPorId(id));
 
             // Salva as alterações
             ctx.SaveChanges();
         }
 
-        public List<Usuario> Listar()
+        public List<Pjuridica> Listar()
         {
             // Retorna uma lista com todas as informações dos tipos de usuários, exceto as senhas
-            return ctx.Usuarios.ToList();
+            return ctx.Pjuridicas.ToList();
         }
 
-        public Usuario Login(string email, string senha)
+        public Pjuridica Login(string email, string senha)
         {
-            return ctx.Usuarios.FirstOrDefault(u => u.Email == email && u.Senha == senha);
+            return ctx.Pjuridicas.FirstOrDefault(u => u.Email == email && u.Senha == senha);
         }
     }
 }

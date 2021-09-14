@@ -14,14 +14,14 @@ namespace Senai_OfertasWebApi.Controllers
     [Produces("application/json")]
     [Route("api/[controller]")]
     [ApiController]
-    public class UsuarioController : ControllerBase
+    public class PfisicaController : ControllerBase
     {
 
-        private IUsuarioRepository _usuarioRepository { get; set; }
+        private IPfisicaRepository _pfisicaRepository { get; set; }
 
-        public UsuarioController()
+        public PfisicaController()
         {
-            _usuarioRepository = new usuarioRepository();
+            _pfisicaRepository = new PfisicaRepository();
         }
 
         /// <summary>
@@ -33,7 +33,7 @@ namespace Senai_OfertasWebApi.Controllers
         public IActionResult Get()
         {
             //retorna a resposta da  requisição fazendo uma chamada para o método
-            return Ok(_usuarioRepository.Listar());
+            return Ok(_pfisicaRepository.Listar());
         }
 
         /// <summary>
@@ -43,11 +43,11 @@ namespace Senai_OfertasWebApi.Controllers
         /// <returns>um statud code 201- Created</returns>
         [Authorize]
         [HttpPost]
-        public IActionResult Post(Usuario NovoUsuario)
+        public IActionResult Post(Pfisica NovoUsuario)
 
         {
             //faza a chamada para o método 
-            _usuarioRepository.Cadastrar(NovoUsuario);
+            _pfisicaRepository.Cadastrar(NovoUsuario);
 
             return StatusCode(201);
         }
@@ -57,7 +57,7 @@ namespace Senai_OfertasWebApi.Controllers
         public IActionResult Delete(int id)
         {
             //faz a chamada para o método
-            _usuarioRepository.Deletar(id);
+            _pfisicaRepository.Deletar(id);
 
             //retorna um status code
             return StatusCode(204);

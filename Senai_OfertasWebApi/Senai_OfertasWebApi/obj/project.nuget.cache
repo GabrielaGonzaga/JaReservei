@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "A6rcLEfWmF2oA68TaBCJb8J+eX8kkac1HsCpX0xtsUav9IixO5g4+/X/WdhgF7b+0LDNMt4AaqIbg8Jb35FALA==",
+  "dgSpecHash": "u1zsyjtonDyUpL01Bxo8KVAnUeHfeUOkGynXuqz3OAAB2Hm9d7Ly2nvmmrWsTHLr1NadSLirTnNRxHChtTmVqw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Lameck\\Desktop\\SenaiOfertas\\Senai_OfertasWebApi\\Senai_OfertasWebApi\\Senai_OfertasWebApi.csproj",
+  "projectFilePath": "C:\\Users\\Lameck\\Desktop\\git-senai_ofertas\\Senai_Ofertas\\Senai_OfertasWebApi\\Senai_OfertasWebApi\\Senai_OfertasWebApi.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Lameck\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\Lameck\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\5.0.9\\microsoft.aspnetcore.authentication.jwtbearer.5.0.9.nupkg.sha512",
