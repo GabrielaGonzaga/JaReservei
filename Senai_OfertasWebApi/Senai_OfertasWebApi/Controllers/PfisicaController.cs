@@ -52,6 +52,22 @@ namespace Senai_OfertasWebApi.Controllers
             return StatusCode(201);
         }
 
+        /// <summary>
+        /// Atualiza um pfisica existente
+        /// </summary>
+        /// <param name="id">ID do pfisica que será atualizado</param>
+        /// <param name="PfisicaAtualizada">Objeto pfisicaAtualizado com as novas informações</param>
+        /// <returns>Um status code 204 - No Content</returns>
+        [HttpPut("{id}")]
+        public IActionResult Put(int id, Pfisica PfisicaAtualizada)
+        {
+            // Faz a chamada para o método
+            _pfisicaRepository.Atualizar(id, PfisicaAtualizada);
+
+            // Retorna um status code
+            return StatusCode(204);
+        }
+
         [Authorize]
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)

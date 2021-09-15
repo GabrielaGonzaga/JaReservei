@@ -8,7 +8,6 @@ namespace Senai_OfertasWebApi.Interfaces
 {
     interface IPfisicaRepository
     {
-
         /// <summary>
         /// Lista todos os Pfisica
         /// </summary>
@@ -25,8 +24,8 @@ namespace Senai_OfertasWebApi.Interfaces
         /// <summary>
         /// Cadastra um novo usuário
         /// </summary>
-        /// <param name="novoUsuario">Objeto novoUsuario que será cadastrado</param>
-        void Cadastrar(Pfisica novoUsuario);
+        /// <param name="novaPfisica">Objeto novoUsuario que será cadastrado</param>
+        void Cadastrar(Pfisica novaPfisica);
 
         /// <summary>
         /// Deleta um usuário existente
@@ -34,13 +33,13 @@ namespace Senai_OfertasWebApi.Interfaces
         /// <param name="id">ID do usuário que será deletado</param>
         void Deletar(int id);
 
+
         /// <summary>
-        /// Valida o usuário
+        /// Atualiza um usuario existente
         /// </summary>
-        /// <param name="email">e-mail do usuário</param>
-        /// <param name="senha">senha do usuário</param>
-        /// <returns>Um objeto do tipo Usuario que foi buscado</returns>
-        Pfisica Login(string email, string senha);
+        /// <param name="id">ID do usuario que será atualizado</param>
+        /// <param name="pfisicaAtualizada">Objeto usuarioAtualizado com as novas informações</param>
+        void Atualizar(int id, Pfisica pfisicaAtualizada);
 
     }
 }

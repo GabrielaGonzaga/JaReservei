@@ -10,17 +10,62 @@ namespace Senai_OfertasWebApi.Repositories
 {
     public class PjuridicaRepository : IPjuridicaRepository
     {
-        SenaiOfertasContext ctx = new SenaiOfertasContext();
+        JaReserveiContext ctx = new JaReserveiContext();
+
+        public void Atualizar(int id, Pjuridica PjuridicaAtualizada)
+        {
+            //Busca um Pjuridica através do id
+            Pjuridica PjuridicaBuscada = ctx.Pjuridicas.Find(id);
+
+            // Verifica as informações
+
+            if (PjuridicaAtualizada.IdUsuario != null)
+            {
+                // Atribui os novos valores aos campos existentes
+                PjuridicaBuscada.IdUsuario = PjuridicaAtualizada.IdUsuario;
+            }
+
+            if (PjuridicaAtualizada.Nome != null)
+            {
+                // Atribui os novos valores aos campos existentes
+                PjuridicaBuscada.Nome = PjuridicaAtualizada.Nome;
+            }
+
+            if (PjuridicaAtualizada.EmailEmpresa != null)
+            {
+                // Atribui os novos valores aos campos existentes
+                PjuridicaBuscada.EmailEmpresa = PjuridicaAtualizada.EmailEmpresa;
+            }
+
+            if (PjuridicaAtualizada.NomeEmpresa != null)
+            {
+                // Atribui os novos valores aos campos existentes
+                PjuridicaBuscada.NomeEmpresa = PjuridicaAtualizada.NomeEmpresa;
+            }
+
+            if (PjuridicaAtualizada.Telefone != null)
+            {
+                // Atribui os novos valores aos campos existentes
+                PjuridicaBuscada.Telefone = PjuridicaAtualizada.Telefone;
+            }
+
+            if (PjuridicaAtualizada.Cnpj != null)
+            {
+                // Atribui os novos valores aos campos existentes
+                PjuridicaBuscada.Cnpj = PjuridicaAtualizada.Cnpj;
+            }
+
+            // Atualiza o Pjuridica que foi buscado
+            ctx.Pjuridicas.Update(PjuridicaBuscada);
+
+            // Salva as informações para serem gravadas no banco de dados
+            ctx.SaveChanges();
+        }
+
         public Pjuridica BuscarPorId(int id)
         {
-            // Retorna o primeiro usuário encontrado para o ID informado, sem exibir sua senha
-            return ctx.Pjuridicas
-                .Select(u => new Pjuridica()
-                {
-                    IdPjuridica = u.IdPjuridica,
-                    Email = u.Email
-                })
-                .FirstOrDefault(u => u.IdPjuridica == id);
+            // Retorna o primeiro paciente encontrado para o ID informado
+            return ctx.Pjuridicas.FirstOrDefault(u => u.IdPjuridica == id);
         }
 
         public void Cadastrar(Pjuridica novaPjuridica)
@@ -45,11 +90,6 @@ namespace Senai_OfertasWebApi.Repositories
         {
             // Retorna uma lista com todas as informações dos tipos de usuários, exceto as senhas
             return ctx.Pjuridicas.ToList();
-        }
-
-        public Pjuridica Login(string email, string senha)
-        {
-            return ctx.Pjuridicas.FirstOrDefault(u => u.Email == email && u.Senha == senha);
         }
     }
 }

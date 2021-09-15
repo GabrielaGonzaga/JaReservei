@@ -11,28 +11,60 @@ namespace Senai_OfertasWebApi.Repositories
     public class PfisicaRepository : IPfisicaRepository
     {
 
-        SenaiOfertasContext ctx = new SenaiOfertasContext();
+        JaReserveiContext ctx = new JaReserveiContext();
 
-        public Pfisica BuscarPorId(int id)
+        public void Atualizar(int id, Pfisica PfisicaAtualizada)
         {
-            // Retorna o primeiro usuário encontrado para o ID informado, sem exibir sua senha
-            return ctx.Pfisicas
-                .Select(u => new Pfisica()
-                {
-                    IdPfisica = u.IdPfisica,
-                    Email = u.Email
-                })
-                .FirstOrDefault(u => u.IdPfisica == id);
-        }
+            //Busca um Pfisica através do id
+            Pfisica PfisicaBuscada = ctx.Pfisicas.Find(id);
 
-        public void Cadastrar(Pfisica novoUsuario)
-        {
-            // Adiciona este novoUsuario
-            ctx.Pfisicas.Add(novoUsuario);
+            // Verifica as informações
+
+            if (PfisicaAtualizada.IdUsuario != null)
+            {
+                // Atribui os novos valores aos campos existentes
+                PfisicaBuscada.IdUsuario = PfisicaAtualizada.IdUsuario;
+            }
+
+            if (PfisicaAtualizada.Nome != null)
+            {
+                // Atribui os novos valores aos campos existentes
+                PfisicaBuscada.Nome = PfisicaAtualizada.Nome;
+            }
+
+            if (PfisicaAtualizada.Telefone != null)
+            {
+                // Atribui os novos valores aos campos existentes
+                PfisicaBuscada.Telefone = PfisicaAtualizada.Telefone;
+            }
+
+            if (PfisicaAtualizada.Cpf != null)
+            {
+                // Atribui os novos valores aos campos existentes
+                PfisicaBuscada.Cpf = PfisicaAtualizada.Cpf;
+            }
+
+            // Atualiza o Pfisica que foi buscado
+            ctx.Pfisicas.Update(PfisicaBuscada);
 
             // Salva as informações para serem gravadas no banco de dados
             ctx.SaveChanges();
         }
+
+        public Pfisica BuscarPorId(int id)
+        {
+            return ctx.Pfisicas.FirstOrDefault(u => u.IdPfisica == id);
+        }
+
+        public void Cadastrar(Pfisica novaPfisica)
+        {
+            // Adiciona este novoPfisica
+            ctx.Pfisicas.Add(novaPfisica);
+
+            // Salva as informações para serem gravadas no banco de dados
+            ctx.SaveChanges();
+        }
+
 
         public void Deletar(int id)
         {
@@ -47,9 +79,6 @@ namespace Senai_OfertasWebApi.Repositories
             return ctx.Pfisicas.ToList();
         }
 
-        public Pfisica Login(string email, string senha)
-        {
-            return ctx.Pfisicas.FirstOrDefault(u => u.Email == email && u.Senha == senha);
-        }
+       
     }
 }

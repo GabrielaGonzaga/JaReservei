@@ -7,13 +7,13 @@ using Senai_OfertasWebApi.Domains;
 
 namespace Senai_OfertasWebApi.Contexts
 {
-    public partial class SenaiOfertasContext : DbContext
+    public partial class JaReserveiContext : DbContext
     {
-        public SenaiOfertasContext()
+        public JaReserveiContext()
         {
         }
 
-        public SenaiOfertasContext(DbContextOptions<SenaiOfertasContext> options)
+        public JaReserveiContext(DbContextOptions<JaReserveiContext> options)
             : base(options)
         {
         }
@@ -23,13 +23,17 @@ namespace Senai_OfertasWebApi.Contexts
         public virtual DbSet<Produto> Produtos { get; set; }
         public virtual DbSet<Reserva> Reservas { get; set; }
         public virtual DbSet<TipoProduto> TipoProdutos { get; set; }
+        public virtual DbSet<TipoUsuario> TipoUsuarios { get; set; }
+        public virtual DbSet<Usuario> Usuarios { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
-//#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Data Source=DESKTOP-0KGDOK7; initial catalog=JaReservei; user Id=sa; pwd=senai@123;");
+        
+
+        //#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+                optionsBuilder.UseSqlServer("Data Source=DESKTOP-RGIIP6F; initial catalog=JaReservei; user Id=sa; pwd=Semprepea10;");
             }
         }
 
@@ -40,9 +44,12 @@ namespace Senai_OfertasWebApi.Contexts
             modelBuilder.Entity<Pfisica>(entity =>
             {
                 entity.HasKey(e => e.IdPfisica)
-                    .HasName("PK__Pfisica__60B4281DE0FC50BC");
+                    .HasName("PK__Pfisica__60B4281D71B4F0DA");
 
                 entity.ToTable("Pfisica");
+
+                entity.HasIndex(e => e.Cpf, "UQ__Pfisica__C1F8973112BCFA7D")
+                    .IsUnique();
 
                 entity.Property(e => e.Cpf)
                     .IsRequired()
@@ -50,41 +57,34 @@ namespace Senai_OfertasWebApi.Contexts
                     .IsUnicode(false)
                     .HasColumnName("CPF");
 
-                entity.Property(e => e.Email)
-                    .IsRequired()
-                    .HasMaxLength(200)
-                    .IsUnicode(false);
-
                 entity.Property(e => e.Nome)
                     .IsRequired()
                     .HasMaxLength(200)
                     .IsUnicode(false);
 
-                entity.Property(e => e.Senha)
-                    .IsRequired()
-                    .HasMaxLength(200)
-                    .IsUnicode(false);
-
                 entity.Property(e => e.Telefone).HasColumnType("decimal(13, 0)");
+
+                entity.HasOne(d => d.IdUsuarioNavigation)
+                    .WithMany(p => p.Pfisicas)
+                    .HasForeignKey(d => d.IdUsuario)
+                    .HasConstraintName("FK__Pfisica__IdUsuar__440B1D61");
             });
 
             modelBuilder.Entity<Pjuridica>(entity =>
             {
                 entity.HasKey(e => e.IdPjuridica)
-                    .HasName("PK__Pjuridic__4EE9FF32BE49F25C");
+                    .HasName("PK__Pjuridic__4EE9FF32819F75E3");
 
                 entity.ToTable("Pjuridica");
+
+                entity.HasIndex(e => e.Cnpj, "UQ__Pjuridic__AA57D6B446567394")
+                    .IsUnique();
 
                 entity.Property(e => e.Cnpj)
                     .IsRequired()
                     .HasMaxLength(200)
                     .IsUnicode(false)
                     .HasColumnName("CNPJ");
-
-                entity.Property(e => e.Email)
-                    .IsRequired()
-                    .HasMaxLength(200)
-                    .IsUnicode(false);
 
                 entity.Property(e => e.EmailEmpresa)
                     .IsRequired()
@@ -101,18 +101,18 @@ namespace Senai_OfertasWebApi.Contexts
                     .HasMaxLength(200)
                     .IsUnicode(false);
 
-                entity.Property(e => e.Senha)
-                    .IsRequired()
-                    .HasMaxLength(200)
-                    .IsUnicode(false);
-
                 entity.Property(e => e.Telefone).HasColumnType("decimal(13, 0)");
+
+                entity.HasOne(d => d.IdUsuarioNavigation)
+                    .WithMany(p => p.Pjuridicas)
+                    .HasForeignKey(d => d.IdUsuario)
+                    .HasConstraintName("FK__Pjuridica__IdUsu__47DBAE45");
             });
 
             modelBuilder.Entity<Produto>(entity =>
             {
                 entity.HasKey(e => e.IdProduto)
-                    .HasName("PK__Produto__2E883C23D4B8166D");
+                    .HasName("PK__Produto__2E883C23C0DE487D");
 
                 entity.ToTable("Produto");
 
@@ -138,51 +138,41 @@ namespace Senai_OfertasWebApi.Contexts
 
                 entity.Property(e => e.Preco).HasColumnType("decimal(18, 2)");
 
-                entity.HasOne(d => d.IdPfisicaNavigation)
-                    .WithMany(p => p.Produtos)
-                    .HasForeignKey(d => d.IdPfisica)
-                    .HasConstraintName("FK__Produto__IdPfisi__4E88ABD4");
-
-                entity.HasOne(d => d.IdPjuridicaNavigation)
-                    .WithMany(p => p.Produtos)
-                    .HasForeignKey(d => d.IdPjuridica)
-                    .HasConstraintName("FK__Produto__IdPjuri__4D94879B");
-
                 entity.HasOne(d => d.IdTipoProdutoNavigation)
                     .WithMany(p => p.Produtos)
                     .HasForeignKey(d => d.IdTipoProduto)
-                    .HasConstraintName("FK__Produto__IdTipoP__4F7CD00D");
+                    .HasConstraintName("FK__Produto__IdTipoP__403A8C7D");
+
+                entity.HasOne(d => d.IdUsuarioNavigation)
+                    .WithMany(p => p.Produtos)
+                    .HasForeignKey(d => d.IdUsuario)
+                    .HasConstraintName("FK__Produto__IdUsuar__3F466844");
             });
 
             modelBuilder.Entity<Reserva>(entity =>
             {
                 entity.HasKey(e => e.IdReserva)
-                    .HasName("PK__Reserva__0E49C69DECFA3B41");
+                    .HasName("PK__Reserva__0E49C69D6569255E");
 
                 entity.ToTable("Reserva");
 
                 entity.Property(e => e.PrecoTotal).HasColumnType("decimal(18, 2)");
 
-                entity.HasOne(d => d.IdPfisicaNavigation)
-                    .WithMany(p => p.Reservas)
-                    .HasForeignKey(d => d.IdPfisica)
-                    .HasConstraintName("FK__Reserva__IdPfisi__534D60F1");
-
-                entity.HasOne(d => d.IdPjuridicaNavigation)
-                    .WithMany(p => p.Reservas)
-                    .HasForeignKey(d => d.IdPjuridica)
-                    .HasConstraintName("FK__Reserva__IdPjuri__5441852A");
-
                 entity.HasOne(d => d.IdProdutoNavigation)
                     .WithMany(p => p.Reservas)
                     .HasForeignKey(d => d.IdProduto)
-                    .HasConstraintName("FK__Reserva__IdProdu__52593CB8");
+                    .HasConstraintName("FK__Reserva__IdProdu__4AB81AF0");
+
+                entity.HasOne(d => d.IdUsuarioNavigation)
+                    .WithMany(p => p.Reservas)
+                    .HasForeignKey(d => d.IdUsuario)
+                    .HasConstraintName("FK__Reserva__IdUsuar__4BAC3F29");
             });
 
             modelBuilder.Entity<TipoProduto>(entity =>
             {
                 entity.HasKey(e => e.IdTipoProduto)
-                    .HasName("PK__TipoProd__F71CDF617FD0EEC2");
+                    .HasName("PK__TipoProd__F71CDF61F375500E");
 
                 entity.ToTable("TipoProduto");
 
@@ -190,6 +180,54 @@ namespace Senai_OfertasWebApi.Contexts
                     .IsRequired()
                     .HasMaxLength(200)
                     .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<TipoUsuario>(entity =>
+            {
+                entity.HasKey(e => e.IdTipoUsuario)
+                    .HasName("PK__TipoUsua__CA04062BAD5A6C60");
+
+                entity.ToTable("TipoUsuario");
+
+                entity.HasIndex(e => e.TipoUsuario1, "UQ__TipoUsua__52F7E3AA07E6F635")
+                    .IsUnique();
+
+                entity.Property(e => e.TipoUsuario1)
+                    .IsRequired()
+                    .HasMaxLength(200)
+                    .IsUnicode(false)
+                    .HasColumnName("TipoUsuario");
+            });
+
+            modelBuilder.Entity<Usuario>(entity =>
+            {
+                entity.HasKey(e => e.IdUsuario)
+                    .HasName("PK__Usuario__5B65BF97FB066BFB");
+
+                entity.ToTable("Usuario");
+
+                entity.HasIndex(e => e.Email, "UQ__Usuario__A9D105341566A4E0")
+                    .IsUnique();
+
+                entity.Property(e => e.Email)
+                    .IsRequired()
+                    .HasMaxLength(200)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.NomeUsuario)
+                    .IsRequired()
+                    .HasMaxLength(200)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Senha)
+                    .IsRequired()
+                    .HasMaxLength(200)
+                    .IsUnicode(false);
+
+                entity.HasOne(d => d.IdTipoUsuarioNavigation)
+                    .WithMany(p => p.Usuarios)
+                    .HasForeignKey(d => d.IdTipoUsuario)
+                    .HasConstraintName("FK__Usuario__IdTipoU__3C69FB99");
             });
 
             OnModelCreatingPartial(modelBuilder);

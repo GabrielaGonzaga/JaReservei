@@ -56,6 +56,22 @@ namespace Senai_OfertasWebApi.Controllers
             return StatusCode(201);
         }
 
+          /// <summary>
+        /// Atualiza um pjuridica existente
+        /// </summary>
+        /// <param name="id">ID do pjuridica que será atualizado</param>
+        /// <param name="PjuridicaAtualizada">Objeto pjuridicaAtualizado com as novas informações</param>
+        /// <returns>Um status code 204 - No Content</returns>
+        [HttpPut("{id}")]
+        public IActionResult Put(int id, Pjuridica PjuridicaAtualizada)
+        {
+            // Faz a chamada para o método
+            _pjuridicaRepository.Atualizar(id, PjuridicaAtualizada);
+
+            // Retorna um status code
+            return StatusCode(204);
+        }
+
         [Authorize]
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)

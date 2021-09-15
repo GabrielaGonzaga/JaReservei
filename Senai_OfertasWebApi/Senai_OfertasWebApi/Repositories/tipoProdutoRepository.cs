@@ -11,7 +11,7 @@ namespace Senai_OfertasWebApi.Repositories
     public class tipoProdutoRepository : ITipoProdutoRepository
     {
 
-        SenaiOfertasContext ctx = new SenaiOfertasContext();
+        JaReserveiContext ctx = new JaReserveiContext();
 
         public void Atualizar(int id, TipoProduto TipoProdutoAtualizado)
         {

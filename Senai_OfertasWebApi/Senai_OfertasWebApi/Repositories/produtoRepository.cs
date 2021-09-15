@@ -12,7 +12,7 @@ namespace Senai_OfertasWebApi.Repositories
     public class produtoRepository : IProdutoRepository
     {
 
-        SenaiOfertasContext ctx = new SenaiOfertasContext();
+        JaReserveiContext ctx = new JaReserveiContext();
 
         public void Atualizar(int id, Produto produtoAtualizado)
         {
@@ -93,19 +93,24 @@ namespace Senai_OfertasWebApi.Repositories
             return ctx.Produtos.ToList();
         }
 
-
-        public List<Produto> ListarMeusProdutos(int idPfisica, int idPjuridica)
+        public List<Produto> ListarMeusProdutos(int IdPfisica, int idPjuridica)
         {
-            return ctx.Produtos
-
-            .Include(c => c.IdPfisicaNavigation)
-            .Include(c => c.IdPjuridicaNavigation)
-
-            .Where(c => c.IdPfisicaNavigation.IdPfisica == idPfisica)
-            .Where(c => c.IdPjuridicaNavigation.IdPjuridica == idPjuridica)
-
-            .ToList();
+            throw new NotImplementedException();
         }
+
+
+        //public List<Produto> ListarMeusProdutos(int idPfisica, int idPjuridica)
+        //{
+        //   return ctx.Produtos
+
+        //    .Include(c => c.IdPfisicaNavigation)
+        //    .Include(c => c.IdPjuridicaNavigation)
+
+        //   .Where(c => c.IdPfisicaNavigation.IdPfisica == idPfisica)
+        //   .Where(c => c.IdPjuridicaNavigation.IdPjuridica == idPjuridica)
+
+        //  .ToList();
     }
-}
+    }
+
 

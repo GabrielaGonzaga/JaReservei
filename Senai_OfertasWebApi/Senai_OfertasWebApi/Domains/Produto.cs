@@ -13,8 +13,7 @@ namespace Senai_OfertasWebApi.Domains
         }
 
         public int IdProduto { get; set; }
-        public int? IdPjuridica { get; set; }
-        public int? IdPfisica { get; set; }
+        public int? IdUsuario { get; set; }
         public int? IdTipoProduto { get; set; }
         public string NomeProduto { get; set; }
         public string LinkProduto { get; set; }
@@ -23,9 +22,8 @@ namespace Senai_OfertasWebApi.Domains
         public int Quantidade { get; set; }
         public decimal Preco { get; set; }
 
-        public virtual Pfisica IdPfisicaNavigation { get; set; }
-        public virtual Pjuridica IdPjuridicaNavigation { get; set; }
         public virtual TipoProduto IdTipoProdutoNavigation { get; set; }
+        public virtual Usuario IdUsuarioNavigation { get; set; }
         public virtual ICollection<Reserva> Reservas { get; set; }
     }
 }
