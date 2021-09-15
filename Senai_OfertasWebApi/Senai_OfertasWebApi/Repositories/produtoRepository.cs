@@ -1,4 +1,5 @@
-﻿using Senai_OfertasWebApi.Contexts;
+﻿using Microsoft.EntityFrameworkCore;
+using Senai_OfertasWebApi.Contexts;
 using Senai_OfertasWebApi.Domains;
 using Senai_OfertasWebApi.Interfaces;
 using System;
@@ -91,5 +92,20 @@ namespace Senai_OfertasWebApi.Repositories
         {
             return ctx.Produtos.ToList();
         }
+
+        public List<Produto> ListarMeusProdutos(int idPfisica)
+        {
+            return ctx.Produtos
+
+            .Include(c => c.IdPfisicaNavigation)
+
+            .Where(c => c.IdPfisica.Produto == idPfisica)
+
+            .ToList();
+        }
+
+
     }
+
+}
 }

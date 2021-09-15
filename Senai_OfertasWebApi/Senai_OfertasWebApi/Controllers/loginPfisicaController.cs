@@ -14,6 +14,7 @@ using System.Threading.Tasks;
 
 namespace Senai_OfertasWebApi.Controllers
 {
+    [Produces("application/json")]
     [Route("api/[controller]")]
     [ApiController]
     public class loginPfisicaController : ControllerBase {

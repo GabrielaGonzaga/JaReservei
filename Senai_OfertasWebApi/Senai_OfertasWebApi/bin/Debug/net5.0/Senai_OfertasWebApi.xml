@@ -4,12 +4,12 @@
         <name>Senai_OfertasWebApi</name>
     </assembly>
     <members>
-        <member name="M:Senai_OfertasWebApi.Controllers.loginController.#ctor">
+        <member name="M:Senai_OfertasWebApi.Controllers.loginPfisicaController.#ctor">
             <summary>
             Instancia este objeto para que haja a referência aos métodos no repositório
             </summary>
         </member>
-        <member name="M:Senai_OfertasWebApi.Controllers.loginController.Post(Senai_OfertasWebApi.ViewModels.LoginViewModel)">
+        <member name="M:Senai_OfertasWebApi.Controllers.loginPfisicaController.Post(Senai_OfertasWebApi.ViewModels.LoginViewModel)">
             <summary>
             Valida o usuário
             </summary>
@@ -17,18 +17,110 @@
             <returns>Retorna um token com as informações do usuário</returns>
             dominio/api/Login
         </member>
-        <member name="M:Senai_OfertasWebApi.Controllers.UsuarioController.Get">
+        <member name="M:Senai_OfertasWebApi.Controllers.loginPjuridicaController.#ctor">
+            <summary>
+            Instancia este objeto para que haja a referência aos métodos no repositório
+            </summary>
+        </member>
+        <member name="M:Senai_OfertasWebApi.Controllers.loginPjuridicaController.Post(Senai_OfertasWebApi.ViewModels.LoginViewModel)">
+            <summary>
+            Valida o usuário
+            </summary>
+            <param name="login">Objeto login que contém o e-mail e a senha do usuário</param>
+            <returns>Retorna um token com as informações do usuário</returns>
+            dominio/api/Login
+        </member>
+        <member name="M:Senai_OfertasWebApi.Controllers.PfisicaController.Get">
             <summary>
             Lista todos os usuarios
             </summary>
             <returns>Uma lista de usuarios e um status code 200 - ok </returns>
         </member>
-        <member name="M:Senai_OfertasWebApi.Controllers.UsuarioController.Post(Senai_OfertasWebApi.Domains.Usuario)">
+        <member name="M:Senai_OfertasWebApi.Controllers.PfisicaController.Post(Senai_OfertasWebApi.Domains.Pfisica)">
             <summary>
             Cadastra um novo usuario
             </summary>
             <param name="NovoUsuario">objeto NovoUsuario que será cadastrado</param>
             <returns>um statud code 201- Created</returns>
+        </member>
+        <member name="M:Senai_OfertasWebApi.Controllers.PjuridicaController.Get">
+            <summary>
+            Lista todos os usuarios
+            </summary>
+            <returns>Uma lista de usuarios e um status code 200 - ok </returns>
+        </member>
+        <member name="M:Senai_OfertasWebApi.Controllers.PjuridicaController.Post(Senai_OfertasWebApi.Domains.Pjuridica)">
+            <summary>
+            Cadastra um novo usuario
+            </summary>
+            <param name="NovoUsuario">objeto NovoUsuario que será cadastrado</param>
+            <returns>um statud code 201- Created</returns>
+        </member>
+        <member name="M:Senai_OfertasWebApi.Interfaces.IPfisicaRepository.Listar">
+            <summary>
+            Lista todos os Pfisica
+            </summary>
+            <returns>Uma lista de usuários</returns>
+        </member>
+        <member name="M:Senai_OfertasWebApi.Interfaces.IPfisicaRepository.BuscarPorId(System.Int32)">
+            <summary>
+            Busca um usuário através do ID
+            </summary>
+            <param name="id">ID do usuário que será buscado</param>
+            <returns>Um usuário buscado</returns>
+        </member>
+        <member name="M:Senai_OfertasWebApi.Interfaces.IPfisicaRepository.Cadastrar(Senai_OfertasWebApi.Domains.Pfisica)">
+            <summary>
+            Cadastra um novo usuário
+            </summary>
+            <param name="novoUsuario">Objeto novoUsuario que será cadastrado</param>
+        </member>
+        <member name="M:Senai_OfertasWebApi.Interfaces.IPfisicaRepository.Deletar(System.Int32)">
+            <summary>
+            Deleta um usuário existente
+            </summary>
+            <param name="id">ID do usuário que será deletado</param>
+        </member>
+        <member name="M:Senai_OfertasWebApi.Interfaces.IPfisicaRepository.Login(System.String,System.String)">
+            <summary>
+            Valida o usuário
+            </summary>
+            <param name="email">e-mail do usuário</param>
+            <param name="senha">senha do usuário</param>
+            <returns>Um objeto do tipo Usuario que foi buscado</returns>
+        </member>
+        <member name="M:Senai_OfertasWebApi.Interfaces.IPjuridicaRepository.Listar">
+            <summary>
+            Lista todos os usuários
+            </summary>
+            <returns>Uma lista de usuários</returns>
+        </member>
+        <member name="M:Senai_OfertasWebApi.Interfaces.IPjuridicaRepository.BuscarPorId(System.Int32)">
+            <summary>
+            Busca um usuário através do ID
+            </summary>
+            <param name="id">ID do usuário que será buscado</param>
+            <returns>Um usuário buscado</returns>
+        </member>
+        <member name="M:Senai_OfertasWebApi.Interfaces.IPjuridicaRepository.Cadastrar(Senai_OfertasWebApi.Domains.Pjuridica)">
+            <summary>
+            Cadastra um novo usuário
+            </summary>
+            <param name="novaPjuridica">Objeto novoUsuario que será cadastrado</param>
+        </member>
+        <member name="M:Senai_OfertasWebApi.Interfaces.IPjuridicaRepository.Deletar(System.Int32)">
+            <summary>
+            Deleta um usuário existente
+            </summary>
+            <param name="id">ID do usuário que será deletado</param>
+        </member>
+        <member name="M:Senai_OfertasWebApi.Interfaces.IPjuridicaRepository.Login(System.String,System.String)">
+            <summary>
+            Valida o usuário
+            </summary>
+            <param name="email">e-mail do usuário</param>
+            <param name="senha">senha do usuário</param>
+            <returns>Um objeto do tipo Usuario que foi buscado</returns>
         </member>
         <member name="M:Senai_OfertasWebApi.Interfaces.IProdutoRepository.Listar">
             <summary>
@@ -85,39 +177,6 @@
             Deleta um TipoProduto existente
             </summary>
             <param name="id">id do TipoProduto que sera deletado</param>
-        </member>
-        <member name="M:Senai_OfertasWebApi.Interfaces.IUsuarioRepository.Listar">
-            <summary>
-            Lista todos os usuários
-            </summary>
-            <returns>Uma lista de usuários</returns>
-        </member>
-        <member name="M:Senai_OfertasWebApi.Interfaces.IUsuarioRepository.BuscarPorId(System.Int32)">
-            <summary>
-            Busca um usuário através do ID
-            </summary>
-            <param name="id">ID do usuário que será buscado</param>
-            <returns>Um usuário buscado</returns>
-        </member>
-        <member name="M:Senai_OfertasWebApi.Interfaces.IUsuarioRepository.Cadastrar(Senai_OfertasWebApi.Domains.Usuario)">
-            <summary>
-            Cadastra um novo usuário
-            </summary>
-            <param name="novoUsuario">Objeto novoUsuario que será cadastrado</param>
-        </member>
-        <member name="M:Senai_OfertasWebApi.Interfaces.IUsuarioRepository.Deletar(System.Int32)">
-            <summary>
-            Deleta um usuário existente
-            </summary>
-            <param name="id">ID do usuário que será deletado</param>
-        </member>
-        <member name="M:Senai_OfertasWebApi.Interfaces.IUsuarioRepository.Login(System.String,System.String)">
-            <summary>
-            Valida o usuário
-            </summary>
-            <param name="email">e-mail do usuário</param>
-            <param name="senha">senha do usuário</param>
-            <returns>Um objeto do tipo Usuario que foi buscado</returns>
         </member>
     </members>
 </doc>
