@@ -39,5 +39,8 @@ namespace Senai_OfertasWebApi.Interfaces
         /// <param name="id">id da produto a ser buscado</param>
         /// <returns>uma produto buscado</returns>
         Produto BuscarPorId(int id);
+
+        List<Produto> ListarMeusProdutos(int IdPfisica, int idPjuridica);
+        
     }
 }

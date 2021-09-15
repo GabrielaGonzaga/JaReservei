@@ -9,6 +9,7 @@ namespace Senai_OfertasWebApi.Domains
     {
         public Pjuridica()
         {
+            Produtos = new HashSet<Produto>();
             Reservas = new HashSet<Reserva>();
         }
 
@@ -21,6 +22,7 @@ namespace Senai_OfertasWebApi.Domains
         public decimal Telefone { get; set; }
         public string Cnpj { get; set; }
 
+        public virtual ICollection<Produto> Produtos { get; set; }
         public virtual ICollection<Reserva> Reservas { get; set; }
     }
 }

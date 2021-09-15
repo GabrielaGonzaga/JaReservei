@@ -93,19 +93,19 @@ namespace Senai_OfertasWebApi.Repositories
             return ctx.Produtos.ToList();
         }
 
-        public List<Produto> ListarMeusProdutos(int idPfisica)
+
+        public List<Produto> ListarMeusProdutos(int idPfisica, int idPjuridica)
         {
             return ctx.Produtos
 
             .Include(c => c.IdPfisicaNavigation)
+            .Include(c => c.IdPjuridicaNavigation)
 
-            .Where(c => c.IdPfisica.Produto == idPfisica)
+            .Where(c => c.IdPfisicaNavigation.IdPfisica == idPfisica)
+            .Where(c => c.IdPjuridicaNavigation.IdPjuridica == idPjuridica)
 
             .ToList();
         }
-
-
     }
+}
 
-}
-}

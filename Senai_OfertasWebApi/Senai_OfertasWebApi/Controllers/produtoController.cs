@@ -6,6 +6,7 @@ using Senai_OfertasWebApi.Interfaces;
 using Senai_OfertasWebApi.Repositories;
 using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -98,6 +99,28 @@ namespace Senai_OfertasWebApi.Controllers
             catch (Exception erro)
             {
                 return BadRequest(erro);
+            }
+        }
+
+        [Authorize]
+        [HttpGet("meusprodutosfisicos")]
+        public IActionResult ListarConsultasP()
+        {
+            try
+            {
+
+                int idPfisica = Convert.ToInt32(HttpContext.User.Claims.First(u => u.Type == JwtRegisteredClaimNames.Jti).Value);
+                int idPjuridica = Convert.ToInt32(HttpContext.User.Claims.First(u => u.Type == JwtRegisteredClaimNames.Jti).Value);
+
+                return Ok(_produtoRepository.ListarMeusProdutos(idPfisica, idPjuridica));
+            }
+            catch (Exception erro)
+            {
+                return BadRequest(new
+                {
+                    mensagem = "Não é possível mostrar as consultas se o usuário não estiver logado!",
+                    erro
+                });
             }
         }
     }

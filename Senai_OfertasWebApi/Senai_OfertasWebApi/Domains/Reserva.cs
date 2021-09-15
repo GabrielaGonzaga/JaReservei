@@ -12,7 +12,7 @@ namespace Senai_OfertasWebApi.Domains
         public int? IdPfisica { get; set; }
         public int? IdPjuridica { get; set; }
         public int Quantidade { get; set; }
-        public double PrecoTotal { get; set; }
+        public decimal PrecoTotal { get; set; }
 
         public virtual Pfisica IdPfisicaNavigation { get; set; }
         public virtual Pjuridica IdPjuridicaNavigation { get; set; }

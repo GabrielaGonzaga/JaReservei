@@ -40,7 +40,7 @@ namespace Senai_OfertasWebApi.Contexts
             modelBuilder.Entity<Pfisica>(entity =>
             {
                 entity.HasKey(e => e.IdPfisica)
-                    .HasName("PK__Pfisica__60B4281DFFF7E0B2");
+                    .HasName("PK__Pfisica__60B4281DE0FC50BC");
 
                 entity.ToTable("Pfisica");
 
@@ -71,7 +71,7 @@ namespace Senai_OfertasWebApi.Contexts
             modelBuilder.Entity<Pjuridica>(entity =>
             {
                 entity.HasKey(e => e.IdPjuridica)
-                    .HasName("PK__Pjuridic__4EE9FF326B65F9AB");
+                    .HasName("PK__Pjuridic__4EE9FF32BE49F25C");
 
                 entity.ToTable("Pjuridica");
 
@@ -112,7 +112,7 @@ namespace Senai_OfertasWebApi.Contexts
             modelBuilder.Entity<Produto>(entity =>
             {
                 entity.HasKey(e => e.IdProduto)
-                    .HasName("PK__Produto__2E883C23F20BA5A9");
+                    .HasName("PK__Produto__2E883C23D4B8166D");
 
                 entity.ToTable("Produto");
 
@@ -138,39 +138,51 @@ namespace Senai_OfertasWebApi.Contexts
 
                 entity.Property(e => e.Preco).HasColumnType("decimal(18, 2)");
 
+                entity.HasOne(d => d.IdPfisicaNavigation)
+                    .WithMany(p => p.Produtos)
+                    .HasForeignKey(d => d.IdPfisica)
+                    .HasConstraintName("FK__Produto__IdPfisi__4E88ABD4");
+
+                entity.HasOne(d => d.IdPjuridicaNavigation)
+                    .WithMany(p => p.Produtos)
+                    .HasForeignKey(d => d.IdPjuridica)
+                    .HasConstraintName("FK__Produto__IdPjuri__4D94879B");
+
                 entity.HasOne(d => d.IdTipoProdutoNavigation)
                     .WithMany(p => p.Produtos)
                     .HasForeignKey(d => d.IdTipoProduto)
-                    .HasConstraintName("FK__Produto__IdTipoP__3C69FB99");
+                    .HasConstraintName("FK__Produto__IdTipoP__4F7CD00D");
             });
 
             modelBuilder.Entity<Reserva>(entity =>
             {
                 entity.HasKey(e => e.IdReserva)
-                    .HasName("PK__Reserva__0E49C69DA924A85D");
+                    .HasName("PK__Reserva__0E49C69DECFA3B41");
 
                 entity.ToTable("Reserva");
+
+                entity.Property(e => e.PrecoTotal).HasColumnType("decimal(18, 2)");
 
                 entity.HasOne(d => d.IdPfisicaNavigation)
                     .WithMany(p => p.Reservas)
                     .HasForeignKey(d => d.IdPfisica)
-                    .HasConstraintName("FK__Reserva__IdPfisi__403A8C7D");
+                    .HasConstraintName("FK__Reserva__IdPfisi__534D60F1");
 
                 entity.HasOne(d => d.IdPjuridicaNavigation)
                     .WithMany(p => p.Reservas)
                     .HasForeignKey(d => d.IdPjuridica)
-                    .HasConstraintName("FK__Reserva__IdPjuri__412EB0B6");
+                    .HasConstraintName("FK__Reserva__IdPjuri__5441852A");
 
                 entity.HasOne(d => d.IdProdutoNavigation)
                     .WithMany(p => p.Reservas)
                     .HasForeignKey(d => d.IdProduto)
-                    .HasConstraintName("FK__Reserva__IdProdu__3F466844");
+                    .HasConstraintName("FK__Reserva__IdProdu__52593CB8");
             });
 
             modelBuilder.Entity<TipoProduto>(entity =>
             {
                 entity.HasKey(e => e.IdTipoProduto)
-                    .HasName("PK__TipoProd__F71CDF61BAA2F9C8");
+                    .HasName("PK__TipoProd__F71CDF617FD0EEC2");
 
                 entity.ToTable("TipoProduto");
 
