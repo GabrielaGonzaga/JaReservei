@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using Senai_OfertasWebApi.Domains;
@@ -15,9 +16,7 @@ using System.Threading.Tasks;
 namespace Senai_OfertasWebApi.Controllers
 {
     [Produces("application/json")]
-
     [Route("api/[controller]")]
-
     [ApiController]
     public class LoginController : ControllerBase
     {
@@ -34,7 +33,7 @@ namespace Senai_OfertasWebApi.Controllers
             _usuarioRepository = new UsuarioRepository();
         }
 
-
+        
         [HttpPost]
         public IActionResult Login(Usuario login)
         {
@@ -56,8 +55,8 @@ namespace Senai_OfertasWebApi.Controllers
                                               //Tipo da claim + seu valor
                 new Claim(JwtRegisteredClaimNames.Email, usuarioBuscado.Email),
                 new Claim(JwtRegisteredClaimNames.Jti, usuarioBuscado.IdUsuario.ToString()),
-                //new Claim(ClaimTypes.Role, usuarioBuscado.IdTipoUsuario.ToString()),
-                // new Claim("role", usuarioBuscado.IdTipoUsuario.ToString()),
+                new Claim(ClaimTypes.Role, usuarioBuscado.IdTipoUsuario.ToString()),
+                new Claim("role", usuarioBuscado.IdTipoUsuario.ToString()),
                 //new Claim(JwtRegisteredClaimNames.GivenName, usuarioBuscado.NomeUsuario)
 
 
@@ -65,7 +64,7 @@ namespace Senai_OfertasWebApi.Controllers
             };
 
             //Chave de acesso do token          Valor codificado
-            var key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes("JaReservei5563"));
+            var key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes("Senai_Ofertas-chave-autenticacao"));
 
             //Credenciais do token
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
@@ -73,8 +72,8 @@ namespace Senai_OfertasWebApi.Controllers
             //Gera o token 
             var token = new JwtSecurityToken(
 
-                issuer: "JaReservei.webApi",                 // emissor do token
-                audience: "JaReservei.webApi",               // destinatário do token
+                issuer: "Senai_OfertasWebApi",                 // emissor do token
+                audience: "Senai_OfertasWebApi",               // destinatário do token
                 claims: claims,                             // dados de definidos "claims (linha 53)"
                 expires: DateTime.Now.AddMinutes(45),       // tempo de expiração (05:38)
                 signingCredentials: creds                   // credenciais do token 

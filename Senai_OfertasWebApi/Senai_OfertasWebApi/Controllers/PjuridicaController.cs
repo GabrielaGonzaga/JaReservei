@@ -32,7 +32,7 @@ namespace Senai_OfertasWebApi.Controllers
         /// Lista todos os usuarios
         /// </summary>
         /// <returns>Uma lista de usuarios e um status code 200 - ok </returns>
-        [Authorize]
+        [Authorize (Roles = "2")]
         [HttpGet]
         public IActionResult Get()
         {
@@ -56,12 +56,13 @@ namespace Senai_OfertasWebApi.Controllers
             return StatusCode(201);
         }
 
-          /// <summary>
+        /// <summary>
         /// Atualiza um pjuridica existente
         /// </summary>
         /// <param name="id">ID do pjuridica que será atualizado</param>
         /// <param name="PjuridicaAtualizada">Objeto pjuridicaAtualizado com as novas informações</param>
         /// <returns>Um status code 204 - No Content</returns>
+        [Authorize]
         [HttpPut("{id}")]
         public IActionResult Put(int id, Pjuridica PjuridicaAtualizada)
         {
@@ -82,6 +83,27 @@ namespace Senai_OfertasWebApi.Controllers
             //retorna um status code
             return StatusCode(204);
 
+        }
+
+        [Authorize]
+        [HttpGet("meusDados")]
+        public IActionResult MeusDados()
+        {
+            try
+            {
+
+                int idUsuario = Convert.ToInt32(HttpContext.User.Claims.First(u => u.Type == JwtRegisteredClaimNames.Jti).Value);
+
+                return Ok(_pjuridicaRepository.MeusDados(idUsuario));
+            }
+            catch (Exception erro)
+            {
+                return BadRequest(new
+                {
+                    mensagem = "Não é possível mostrar as consultas se o usuário não estiver logado!",
+                    erro
+                });
+            }
         }
     }
 }

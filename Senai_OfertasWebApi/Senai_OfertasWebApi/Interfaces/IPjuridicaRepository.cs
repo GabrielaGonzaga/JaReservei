@@ -40,5 +40,19 @@ namespace Senai_OfertasWebApi.Interfaces
         /// <param name="id">ID do Pjuridica que será Atualizada</param>
         /// <param name="PjuridicaAtualizada">Objeto PjuridicaAtualizada com as novas informações</param>
         void Atualizar(int id, Pjuridica PjuridicaAtualizada);
+
+        /// <summary>
+        /// Lista apenas os dados do usuário
+        /// </summary>
+        /// <param name="idUsuario">id do usuário a ser buscado</param>
+        /// <returns> Dados buscado</returns>
+        List<Pjuridica> MeusDados(int idUsuario);
+
+        /// <summary>
+        /// Lista apenas os dados do usuário
+        /// </summary>
+        /// <param name="idUsuario">id do usuário a ser buscado</param>
+        /// <returns> Dados buscado</returns>
+        void AtualizarMeusDados(int idUsuario, Pjuridica PjuridicaAtualizada, Usuario UsuarioAtualizado);
     }
 }

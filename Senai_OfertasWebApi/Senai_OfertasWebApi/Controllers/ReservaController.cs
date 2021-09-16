@@ -15,23 +15,24 @@ namespace Senai_OfertasWebApi.Controllers
     [Produces("application/json")]
     [Route("api/[controller]")]
     [ApiController]
-    public class produtoController : ControllerBase
+    [Authorize]
+    public class ReservaController : ControllerBase
     {
 
-        private IProdutoRepository _produtoRepository { get; set; }
+        private IReservaRepository _ReservaRepository { get; set; }
 
-        public produtoController()
+        public ReservaController()
         {
-            _produtoRepository = new produtoRepository();
+            _ReservaRepository = new ReservaRepository();
         }
 
-        [Authorize]
+
         [HttpPost]
-        public IActionResult Post(Produto novoProduto)
+        public IActionResult Post(Reserva novoReserva)
         {
             try
             {
-                _produtoRepository.Cadastrar(novoProduto);
+                _ReservaRepository.Cadastrar(novoReserva);
 
                 return StatusCode(201);
             }
@@ -42,13 +43,13 @@ namespace Senai_OfertasWebApi.Controllers
         }
 
 
-        [Authorize]
+
         [HttpGet]
         public IActionResult Get()
         {
             try
             {
-                return Ok(_produtoRepository.Listar());
+                return Ok(_ReservaRepository.Listar());
             }
             catch (Exception erro)
             {
@@ -56,13 +57,13 @@ namespace Senai_OfertasWebApi.Controllers
             }
         }
 
-        [Authorize]
+
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
             try
             {
-                return Ok(_produtoRepository.BuscarPorId(id));
+                return Ok(_ReservaRepository.BuscarPorId(id));
             }
             catch (Exception erro)
             {
@@ -70,13 +71,13 @@ namespace Senai_OfertasWebApi.Controllers
             }
         }
 
-        [Authorize]
+
         [HttpPut("{id}")]
-        public IActionResult Put(int id, Produto produtoAtualizado)
+        public IActionResult Put(int id, Reserva ReservaAtualizado)
         {
             try
             {
-                _produtoRepository.Atualizar(id, produtoAtualizado);
+                _ReservaRepository.Atualizar(id, ReservaAtualizado);
 
                 return StatusCode(204);
             }
@@ -86,13 +87,13 @@ namespace Senai_OfertasWebApi.Controllers
             }
         }
 
-        [Authorize]
+
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
             try
             {
-                _produtoRepository.Deletar(id);
+                _ReservaRepository.Deletar(id);
 
                 return StatusCode(204);
             }
@@ -102,16 +103,17 @@ namespace Senai_OfertasWebApi.Controllers
             }
         }
 
-        [Authorize]
-        [HttpGet("meusprodutos")]
-        public IActionResult ListarMeusProdutos()
+ 
+        [HttpGet("minhasReservas")]
+        public IActionResult MinhasReservas()
         {
             try
             {
 
                 int idUsuario = Convert.ToInt32(HttpContext.User.Claims.First(u => u.Type == JwtRegisteredClaimNames.Jti).Value);
 
-                return Ok(_produtoRepository.ListarMeusProdutos(idUsuario));
+
+                return Ok(_ReservaRepository.MinhasReservas(idUsuario));
             }
             catch (Exception erro)
             {
@@ -122,5 +124,8 @@ namespace Senai_OfertasWebApi.Controllers
                 });
             }
         }
+
     }
+
 }
+

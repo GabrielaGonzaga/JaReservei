@@ -1,4 +1,5 @@
-﻿using Senai_OfertasWebApi.Contexts;
+﻿using Microsoft.EntityFrameworkCore;
+using Senai_OfertasWebApi.Contexts;
 using Senai_OfertasWebApi.Domains;
 using Senai_OfertasWebApi.Interfaces;
 using System;
@@ -90,6 +91,71 @@ namespace Senai_OfertasWebApi.Repositories
         {
             // Retorna uma lista com todas as informações dos tipos de usuários, exceto as senhas
             return ctx.Pjuridicas.ToList();
+        }
+        public List<Pjuridica> MeusDados(int idUsuario)
+        {
+            return ctx.Pjuridicas
+
+           .Include(c => c.IdUsuarioNavigation)
+
+           .Where(c => c.IdUsuarioNavigation.IdUsuario == idUsuario)
+
+           .ToList();
+        }
+
+        public void AtualizarMeusDados(int idUsuario, Pjuridica PjuridicaAtualizada, Usuario UsuarioAtualizado)
+        {
+            //Busca um Pjuridica através do id
+            Pjuridica PjuridicaBuscada = ctx.Pjuridicas.Find(idUsuario);
+            Usuario UsuarioBuscado = ctx.Usuarios.Find(idUsuario);
+
+            // Verifica as informações
+
+            if (UsuarioAtualizado.Email != null)
+            {
+                // Atribui os novos valores aos campos existentes
+                UsuarioBuscado.Email = UsuarioAtualizado.Email;
+            }
+
+            if (UsuarioAtualizado.Senha != null)
+            {
+                // Atribui os novos valores aos campos existentes
+                UsuarioBuscado.Senha = UsuarioAtualizado.Senha;
+            }
+
+            if (PjuridicaAtualizada.EmailEmpresa != null)
+            {
+                // Atribui os novos valores aos campos existentes
+                PjuridicaBuscada.EmailEmpresa = PjuridicaAtualizada.EmailEmpresa;
+            }
+
+            if (PjuridicaAtualizada.NomeEmpresa != null)
+            {
+                // Atribui os novos valores aos campos existentes
+                PjuridicaBuscada.NomeEmpresa = PjuridicaAtualizada.NomeEmpresa;
+            }
+
+            if (PjuridicaAtualizada.Telefone != null)
+            {
+                // Atribui os novos valores aos campos existentes
+                PjuridicaBuscada.Telefone = PjuridicaAtualizada.Telefone;
+            }
+
+            if (PjuridicaAtualizada.Cnpj != null)
+            {
+                // Atribui os novos valores aos campos existentes
+                PjuridicaBuscada.Cnpj = PjuridicaAtualizada.Cnpj;
+            }
+
+            // Atualiza o Pjuridica que foi buscado
+
+
+
+            ctx.Pjuridicas.Update(PjuridicaBuscada);
+
+            ctx.Usuarios.Update(UsuarioBuscado);
+
+            ctx.SaveChanges();
         }
     }
 }

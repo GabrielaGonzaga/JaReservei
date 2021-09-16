@@ -41,5 +41,7 @@ namespace Senai_OfertasWebApi.Interfaces
         /// <param name="pfisicaAtualizada">Objeto usuarioAtualizado com as novas informações</param>
         void Atualizar(int id, Pfisica pfisicaAtualizada);
 
+        List<Pfisica> MeusDados(int idUsuario);
+
     }
 }

@@ -12,6 +12,8 @@ namespace Senai_OfertasWebApi.Controllers
 {
     public class UsuarioController : Controller
     {
+        [Produces("application/json")]
+        [Route("api/[controller]")]
         [ApiController]
         public class UsuariosController : ControllerBase
         {
@@ -32,6 +34,7 @@ namespace Senai_OfertasWebApi.Controllers
             /// Lista todos os perfis
             /// </summary>
             /// <returns>Uma lista de perfis e um status code 200 - Ok</returns>
+            [Authorize]
             [HttpGet]
             public IActionResult Get()
             {
@@ -47,6 +50,7 @@ namespace Senai_OfertasWebApi.Controllers
             /// <param name="id">ID do perfil que será atualizado</param>
             /// <param name="perfilAtualizado">Objeto perfilAtualizado com as novas informações</param>
             /// <returns>Um status code 204 - No Content</returns>
+            [Authorize]
             [HttpPut("{id}")]
             public IActionResult Put(int id, Usuario perfilAtualizado)
             {
@@ -63,6 +67,7 @@ namespace Senai_OfertasWebApi.Controllers
             /// <param name="id">ID do perfil que será buscado</param>
             /// <returns>Um estúdio encontrado e um status code 200 - Ok</returns>
             /// http://localhost:5000/api/estudios/1
+            [Authorize]
             [HttpGet("{id}")]
             public IActionResult GetById(int id)
             {
@@ -93,6 +98,7 @@ namespace Senai_OfertasWebApi.Controllers
             /// </summary>
             /// <param name="id">ID do perfil que será deletado</param>
             /// <returns>Um status code 204 - No Content</returns>
+            [Authorize]
             [HttpDelete("{id}")]
             public IActionResult Delete(int id)
             {

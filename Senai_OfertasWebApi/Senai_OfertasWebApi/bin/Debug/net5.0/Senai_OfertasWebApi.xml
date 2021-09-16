@@ -166,6 +166,13 @@
             <param name="id">ID do Pjuridica que será Atualizada</param>
             <param name="PjuridicaAtualizada">Objeto PjuridicaAtualizada com as novas informações</param>
         </member>
+        <member name="M:Senai_OfertasWebApi.Interfaces.IPjuridicaRepository.MeusDados(System.Int32)">
+            <summary>
+            Lista apenas os dados do usuário
+            </summary>
+            <param name="idUsuario">id do usuário a ser buscado</param>
+            <returns> Dados buscado</returns>
+        </member>
         <member name="M:Senai_OfertasWebApi.Interfaces.IProdutoRepository.Listar">
             <summary>
             Lista todos os produtos
@@ -197,6 +204,45 @@
             </summary>
             <param name="id">id da produto a ser buscado</param>
             <returns>uma produto buscado</returns>
+        </member>
+        <member name="M:Senai_OfertasWebApi.Interfaces.IReservaRepository.Listar">
+            <sumamary>
+            Lista todas os Reservas
+            </sumamary>
+            <returns>umaa lista de Reservas</returns>
+        </member>
+        <member name="M:Senai_OfertasWebApi.Interfaces.IReservaRepository.BuscarPorId(System.Int32)">
+            <sumamary>
+            Busca uma Reserva através do ID
+            </sumamary>
+            <param name="id">ID do Reserva que será buscada</param>
+            <returns>uma Reserva buscada</returns>
+        </member>
+        <member name="M:Senai_OfertasWebApi.Interfaces.IReservaRepository.Cadastrar(Senai_OfertasWebApi.Domains.Reserva)">
+            <sumamary>
+            Cadastra uma nova Reserva
+            </sumamary>
+            <param name="novaReserva">Objeto novaReserva que será cadastrado</param>
+        </member>
+        <member name="M:Senai_OfertasWebApi.Interfaces.IReservaRepository.Deletar(System.Int32)">
+            <sumamary>
+            Deleta uma Reserva existente
+            </sumamary>
+            <param name="id">ID do Reserva que será deletado</param>
+        </member>
+        <member name="M:Senai_OfertasWebApi.Interfaces.IReservaRepository.Atualizar(System.Int32,Senai_OfertasWebApi.Domains.Reserva)">
+            <sumamary>
+            Atualiza uma Reserva existente
+            </sumamary>
+            <param name="id">ID do Reserva que será Atualizada</param>
+            <param name="ReservaAtualizada">Objeto ReservaAtualizada com as novas informações</param>
+        </member>
+        <member name="M:Senai_OfertasWebApi.Interfaces.IReservaRepository.MinhasReservas(System.Int32)">
+            <summary>
+            Lista apenas as Reservas do usuário
+            </summary>
+            <param name="idUsuario">id da Reserva a ser buscada</param>
+            <returns>uma Reserva buscada</returns>
         </member>
         <member name="M:Senai_OfertasWebApi.Interfaces.ITipoProdutoRepository.Listar">
             <summary>
